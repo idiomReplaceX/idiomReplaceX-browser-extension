@@ -1,0 +1,24 @@
+{
+  "manifest_version": 2,
+  "name": "IdiomReplaceX",
+  "version": "1.0",
+  "description": "Enables IdiomReplaceX for all web sites.",
+  "content_security_policy": "script-src 'self' https://idiomreplacex.de; object-src 'self' https://idiomreplacex.de",
+  "permissions": [
+    "activeTab"
+  ],
+  "browser_action": {
+    "default_icon": "icons/irx-logo-48.png",
+    "default_title": "IdiomReplaceX"
+  },
+  "icons": {
+    "48": "icons/irx-logo-48.png"
+  },
+  "background": {
+    "scripts": [
+      "js/background-script.js",
+      "js/idiomReplaceX.js"
+    ]
+  }
+}
+
