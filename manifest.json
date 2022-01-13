@@ -3,7 +3,6 @@
   "name": "IdiomReplaceX",
   "version": "1.0",
   "description": "Adds a button to the browser toolbar, which allows starting IdiomReplaceX on almost any web page.",
-  "content_security_policy": "script-src 'self' https://idiomreplacex.de; object-src 'self'",
   "permissions": [
     "*://idiomreplacex.de/*",
     "activeTab"

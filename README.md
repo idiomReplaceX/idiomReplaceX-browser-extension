@@ -22,10 +22,10 @@ then select any file in your extension's directory.
 Also via the page `about:debugging`
 
 ### run
+
 ~~~
 ./node_modules/web-ext/bin/web-ext run 
 ~~~
-
 
 ### code check
 
