@@ -17,13 +17,24 @@ click the "This Firefox" option,
 click the "Load Temporary Add-on" button, 
 then select any file in your extension's directory.
 
-
 ### debugging: 
 
 Also via the page `about:debugging`
 
+### run
+~~~
+./node_modules/web-ext/bin/web-ext run 
+~~~
 
-### XMLHttpRequest  status == 0 problem
 
-https://stackoverflow.com/questions/872206/what-does-it-mean-when-an-http-request-returns-status-code-0#14507670
-https://stackoverflow.com/questions/3825581/does-an-http-status-code-of-0-have-any-meaning/26451773#26451773
+### code check
+
+~~~
+./node_modules/web-ext/bin/web-ext lint 
+~~~
+
+### pack the extension
+
+~~~
+./node_modules/web-ext/bin/web-ext build     
+~~~

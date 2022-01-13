@@ -1,0 +1,11 @@
+{
+  "name": "idiomreplacex-web-ext",
+  "version": "0.0.1",
+  "description": "A browser add on to start IdiomReplaceX on almost any web page",
+  "author": "Andreas Kohlbecker",
+  "license": "GPL-3.0-or-later",
+  "dependencies": {},
+  "devDependencies": {
+    "web-ext": "6.6.*"
+  }
+}
