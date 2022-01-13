@@ -3,8 +3,9 @@
   "name": "IdiomReplaceX",
   "version": "1.0",
   "description": "Enables IdiomReplaceX for all web sites.",
-  "content_security_policy": "script-src 'self' https://idiomreplacex.de; object-src 'self' https://idiomreplacex.de",
+  "content_security_policy": "script-src 'self' https://idiomreplacex.de; object-src 'self'",
   "permissions": [
+    "*://idiomreplacex.de/*",
     "activeTab"
   ],
   "browser_action": {
@@ -16,8 +17,7 @@
   },
   "background": {
     "scripts": [
-      "js/background-script.js",
-      "js/idiomReplaceX.js"
+      "js/background-script.js"
     ]
   }
 }

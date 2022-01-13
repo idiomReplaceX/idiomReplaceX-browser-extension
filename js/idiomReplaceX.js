@@ -54,7 +54,7 @@
     fetchMethodOptions(baseURL, methodSelectElement);
     methodSelectElement.addEventListener('change', function(event){
       setCookie(cookieName, event.target.value, 10);
-      bindTo.location.reload(false);
+      window.location.reload(false);
     })
   }
 
@@ -123,18 +123,32 @@
   }
 
   function jsonQuery(httpMethod, serviceMethod, payload, successCallBack) {
+    // let xmlHttp_debug = new XMLHttpRequest();
+    // xmlHttp_debug.open(httpMethod, bindTo.idiomReplaceX.filterServiceBaseUrl + serviceMethod, false); // true for asynchronous
+    // xmlHttp_debug.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    // xmlHttp_debug.send(payload);
+
     let xmlHttp = new XMLHttpRequest();
-    xmlHttp.onreadystatechange = function () {
-      if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
-        try {
-          let jsonData = JSON.parse(xmlHttp.responseText);
-          successCallBack(jsonData);
-        } catch (syntaxError) {
-          console.error(syntaxError + ' DATA: ' + xmlHttp.responseText);
-        }
-    }
+    // see https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/Synchronous_and_Asynchronous_Requests
     xmlHttp.open(httpMethod, bindTo.idiomReplaceX.filterServiceBaseUrl + serviceMethod, true); // true for asynchronous
     xmlHttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    xmlHttp.onload = function (e) {
+      if (xmlHttp.readyState === 4) {
+        if(xmlHttp.status === 200) {
+          try {
+            let jsonData = JSON.parse(xmlHttp.responseText);
+            successCallBack(jsonData);
+          } catch (syntaxError) {
+            console.error(syntaxError + ' DATA: ' + xmlHttp.responseText);
+          }
+        } else {
+          console.error("ERROR xmlHttp.status: " + xmlHttp.status);
+        }
+      }
+    }
+    xmlHttp.onerror = function (e) {
+      console.error(xmlHttp.statusText);
+    };
     xmlHttp.send(payload);
   }
 
@@ -388,19 +402,3 @@
   }
 
 })(document, window);
-
-// above this line is the original idiomReplaceX.js file from the idiomreplacex-client project
-// --------------------------------------------------------------------------------------------
-// below this line is the code that activates idiomReplaceX for the active browser page
-
-let  clientScriptsBaseUrl = 'https://idiomreplacex.de/client/';
-let  filterServiceBaseUrl = 'https://idiomreplacex.de/service/src/';
-
-// idiomReplaceX.minWordThreshold = 2;
-idiomReplaceX.filterServiceBaseUrl = filterServiceBaseUrl;
-alert("idiomReplaceX.ui - #1");
-idiomReplaceX.ui(clientScriptsBaseUrl);
-alert("idiomReplaceX.ui - done");
-let debug = false;
-idiomReplaceX.extractTextBlocks(debug);
-idiomReplaceX.requestForReplaceX();
