@@ -27,25 +27,53 @@
 
   let methodSelectElement = null;
 
+  function createElement(tagName, attributes, textNodeData){
+    let el = document.createElement(tagName);
+    for (const attributesKey in attributes) {
+      el.setAttribute(attributesKey, attributes[attributesKey]);
+    }
+    el.setAttribute('id', 'idiomreplacex-logo-container');
+    if(textNodeData){
+      el.createTextNode(textNodeData);
+    }
+    return el;
+  }
+
   /**
    * Global function to add the idiomReplaceX UI to a web page.
    *
    * @param baseURL the base URLs of the location where the idiomreplacex-client scripts are hosted
    */
   bindTo.idiomReplaceX.ui = function(baseURL) {
-    var styleEl = document.createElement('link');
-    styleEl.setAttribute("rel", "stylesheet");
-    styleEl.setAttribute("type", "text/css");
-    styleEl.setAttribute("href", baseURL + "/css/style.css");
+    let styleEl = createElement('link', {
+      'rel': "stylesheet",
+      'type': 'text/css',
+      'href': baseURL + "/css/style.css"
+    });
+
     document.head.appendChild(styleEl);
-    var bar = document.createElement('div');
-    bar.setAttribute('id', 'idiomReplaceXUI')
-    // bar.innerHTML = '<h3>IdiomReplaceX</h3>';
-    bar.innerHTML = '<section><div id="idiomreplacex-logo-container" class="logo-container"><img class="logo" src="' + baseURL + '/image/irx-logo.png" /></div><div class="form-container">' +
-      '<label for="idiomreplacex-method"><a href="#">IdiomReplaceX</a> method:</label>' +
-      '<form><select id="idiomreplacex-method" name="method">' +
-      '<option value="" selected>initializing ...</option>' +
-      '</select></form></div></section>';
+    let bar = createElement('div', {'id': 'idiomReplaceXUI'});
+    let section = document.createElement('section');
+    let logoContainer = createElement('div', {'id': 'idiomreplacex-logo-container', "class": "logo-container"})
+      .appendChild(createElement('img', {"class": "logo",  "src": baseURL + '/image/irx-logo.png'}))
+    let formContainer = createElement('div', {'class': "form-container"});
+    let methodLabel = createElement('label', {"for": "idiomreplacex-method"})
+      .appendChild(createElement('a', {'href': "#"}, 'IdiomReplaceX'));
+    methodLabel.createTextNode(' method:');
+    let select = createElement('select', {'id': "idiomreplacex-method",  "name": "method"}).
+      // <option value="" selected>initializing ...</option>' +
+      appendChild(createElement('option', {"value":"",  "selected": null}, 'initializing ...'));
+    let form = createElement('form');
+    form.appendChild(select);
+
+    formContainer.appendChild(methodLabel);
+    formContainer.appendChild(form);
+
+    section.appendChild(logoContainer);
+    section.appendChild(formContainer);
+
+    bar.appendChild(section);
+
     bar.querySelector("#idiomreplacex-logo-container").addEventListener('click', function(event){
       bar.style.left = bar.style.left == '-80px' ? '-300px' : '-80px';
     });
@@ -335,8 +363,10 @@
           textBlockData.node.style.border = '1px dashed red';
           textBlockData.node.style.paddingLeft = '20px';
           textBlockData.node.addEventListener('click', function(event){
-            let infoBlock = document.createElement('div');
-            infoBlock.innerHTML = 'innerText.length: ' + textBlockData.innerText.length + ', words: ' + countWords(textBlockData.innerText) + '<br>text:<small>' +  textBlockData.innerText + '</small>';
+            let infoBlock = createElement('div', {}, 'innerText.length: ' + textBlockData.innerText.length + ', words: ' + countWords(textBlockData.innerText));
+            infoBlock.appendChild(createElement('br'));
+            infoBlock.appendChild(document.createTextNode("text:"));
+            infoBlock.appendChild(createElement('small', {}, 'textBlockData.innerText'));
             event.target.appendChild(infoBlock);
             event.stopPropagation();
           });
@@ -398,7 +428,7 @@
       chars = partAChars.concat(replacementChars, partBChars);
       offset = offset + (replacementChars.length - tokenChars.length);
     };
-    textBlock.node.innerHTML = chars.join("");
+    textBlock.node.appendChild(document.createTextNode(chars.join("")));
   }
 
 })(document, window);
