@@ -38,3 +38,8 @@ Also via the page `about:debugging`
 ~~~
 ./node_modules/web-ext/bin/web-ext build     
 ~~~
+
+### Self-Signing the extension
+
+https://extensionworkshop.com/documentation/publish/signing-and-distribution-overview/
+see "Signing your extension for self-distribution" in https://extensionworkshop.com/documentation/develop/getting-started-with-web-ext/#Signing_your_extension_for_distribution
