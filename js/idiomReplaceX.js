@@ -30,11 +30,12 @@
   function createElement(tagName, attributes, textNodeData){
     let el = document.createElement(tagName);
     for (const attributesKey in attributes) {
-      el.setAttribute(attributesKey, attributes[attributesKey]);
+      if(attributes.hasOwnProperty(attributesKey)){
+        el.setAttribute(attributesKey, attributes[attributesKey]);
+      }
     }
-    el.setAttribute('id', 'idiomreplacex-logo-container');
     if(textNodeData){
-      el.createTextNode(textNodeData);
+      el.appendChild(document.createTextNode(textNodeData));
     }
     return el;
   }
@@ -54,15 +55,15 @@
     document.head.appendChild(styleEl);
     let bar = createElement('div', {'id': 'idiomReplaceXUI'});
     let section = document.createElement('section');
-    let logoContainer = createElement('div', {'id': 'idiomreplacex-logo-container', "class": "logo-container"})
-      .appendChild(createElement('img', {"class": "logo",  "src": baseURL + '/image/irx-logo.png'}))
+    let logoContainer = createElement('div', {'id': 'idiomreplacex-logo-container', "class": "logo-container"});
+    logoContainer.appendChild(createElement('img', {"class": "logo",  "src": baseURL + '/image/irx-logo.png'}))
     let formContainer = createElement('div', {'class': "form-container"});
-    let methodLabel = createElement('label', {"for": "idiomreplacex-method"})
-      .appendChild(createElement('a', {'href': "#"}, 'IdiomReplaceX'));
-    methodLabel.createTextNode(' method:');
-    let select = createElement('select', {'id': "idiomreplacex-method",  "name": "method"}).
+    let methodLabel = createElement('label', {"for": "idiomreplacex-method"});
+    methodLabel.appendChild(createElement('a', {'href': "https://idiomreplacex.de/"}, 'IdiomReplaceX'));
+    methodLabel.appendChild(document.createTextNode(' method:'));
+    let select = createElement('select', {'id': "idiomreplacex-method",  "name": "method"});
       // <option value="" selected>initializing ...</option>' +
-      appendChild(createElement('option', {"value":"",  "selected": null}, 'initializing ...'));
+    select.appendChild(createElement('option', {"value":"",  "selected": null}, 'initializing ...'));
     let form = createElement('form');
     form.appendChild(select);
 
@@ -74,15 +75,14 @@
 
     bar.appendChild(section);
 
-    bar.querySelector("#idiomreplacex-logo-container").addEventListener('click', function(event){
+    logoContainer.addEventListener('click', function(){
       bar.style.left = bar.style.left == '-80px' ? '-300px' : '-80px';
     });
     document.body.appendChild(bar);
-    methodSelectElement = bar.querySelector("#idiomreplacex-method");
-    fetchMethodOptions(baseURL, methodSelectElement);
-    methodSelectElement.addEventListener('change', function(event){
+    fetchMethodOptions(baseURL, select);
+    select.addEventListener('change', function(event){
       setCookie(cookieName, event.target.value, 10);
-      window.location.reload(false);
+      window.location.reload();
     })
   }
 
@@ -419,6 +419,7 @@
   bindTo.idiomReplaceX.replaceInnerHTML = function(textBlock, replaceTokens){
     let offset = 0;
     let chars = [...textBlock.node.innerHTML.normalize()]; // covert into unicode character array
+    const parser = new DOMParser();
     for(let i = 0; i < replaceTokens.length; i++) {
       let rpToken = replaceTokens[i];
       let tokenChars = [...rpToken.token];
@@ -428,7 +429,8 @@
       chars = partAChars.concat(replacementChars, partBChars);
       offset = offset + (replacementChars.length - tokenChars.length);
     };
-    textBlock.node.appendChild(document.createTextNode(chars.join("")));
+    let doc = parser.parseFromString(chars.join(""), "text/html");
+    textBlock.node.appendChild(doc.body);
   }
 
 })(document, window);
