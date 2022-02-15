@@ -12,6 +12,7 @@
   bindTo.idiomReplaceX.minWordThreshold = 5;
   bindTo.idiomReplaceX.filterServiceBaseUrl = null;
   bindTo.idiomReplaceX.relevantTextBlocks = {};
+  bindTo.idiomReplaceX.revertDataList = [];
 
   bindTo.idiomReplaceX.TextBlock = function(node){
     this.htmlChecksum = b_crc32(node.innerHTML);
@@ -398,14 +399,31 @@
       if(currentInnerHtmlChecksum !== textBlock.htmlChecksum){
         console.info("TextBlock.innerHtml has changed meanwhile, skipping ...");
       } else {
-        bindTo.idiomReplaceX.replaceInnerHTML(textBlock, replaceData.replaceTokens);
+        let revertTokens = bindTo.idiomReplaceX.replaceInnerHTML(textBlock, replaceData.replaceTokens);
+        bindTo.idiomReplaceX.revertDataList.push({
+          // htmlChecksum is no longer the checksum of the textBlock as it has just been modified
+          // but we are still using it as key to reference the block in the bindTo.idiomReplaceX.relevantTextBlocks
+          "htmlChecksum": replaceData.htmlChecksum,
+          "replaceTokens": revertTokens
+        });
       }
     } else {
-      console.warn("Received data for unknown text block: " + JSON.stringify(replaceToken));
+      console.warn("Received data for unknown text block: " + JSON.stringify(replaceData));
     }
   }
 
+  bindTo.idiomReplaceX.revertAllReplaceXments = function(){
+    // console.log(JSON.stringify(replaceToken));
+    bindTo.idiomReplaceX.relevantTextBlocks.forEach(function(textBlock, index, array) {
+
+    });
+
+  }
+
   /**
+   * Apply the replaceTokens to the text block.
+   *
+   * It is assumed that the replaceTokens are ordered by the start field.
    *
    * @param textBlock
    * @param replaceTokens
@@ -414,23 +432,33 @@
             "replacement": string,
             "start": int,
             "token": string
-        },
+        }
+   * @return array of revertTokens which can be used to restore the original text
    */
   bindTo.idiomReplaceX.replaceInnerHTML = function(textBlock, replaceTokens){
+    let revertTokens = [];
     let offset = 0;
     let chars = [...textBlock.node.innerHTML.normalize()]; // covert into unicode character array
     const parser = new DOMParser();
     for(let i = 0; i < replaceTokens.length; i++) {
       let rpToken = replaceTokens[i];
+      // create the token, which can be used to restore the original text
+      revertTokens.push({
+        "replacement": rpToken.token,
+        "token": rpToken.replacement,
+        "start": rpToken.start + offset
+      });
       let tokenChars = [...rpToken.token];
       let replacementChars = [...rpToken.replacement];
       let partAChars = chars.slice(0, rpToken.start + offset);
       let partBChars = chars.slice(rpToken.start + offset + tokenChars.length);
       chars = partAChars.concat(replacementChars, partBChars);
       offset = offset + (replacementChars.length - tokenChars.length);
-    };
+    }
     let doc = parser.parseFromString(chars.join(""), "text/html");
     textBlock.node.appendChild(doc.body);
+    return revertTokens;
   }
+
 
 })(document, window);
