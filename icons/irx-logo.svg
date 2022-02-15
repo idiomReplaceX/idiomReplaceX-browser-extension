@@ -25,15 +25,15 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.1596607"
-     inkscape:cx="-542.57557"
-     inkscape:cy="156.12611"
+     inkscape:zoom="1.7032517"
+     inkscape:cx="132.8794"
+     inkscape:cy="154.06411"
      inkscape:document-units="mm"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="layer2"
      showgrid="false"
      units="px"
-     inkscape:window-width="2560"
-     inkscape:window-height="1403"
+     inkscape:window-width="1920"
+     inkscape:window-height="993"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1" />
@@ -62,7 +62,8 @@
       <path
          d="m 49.166016,55.70207 v 46.78125 H 30.134766 V 38.498945 h 24.421875 q 11.15625,0 17.296875,5.53125 6.84375,6.1875 6.84375,15.703125 0,9.703125 -8.484375,16.359375 l 10.96875,26.390625 h -19.96875 l -9.234375,-20.625 V 65.405195 h 1.5 q 6,0 6,-5.15625 0,-4.546875 -6.9375,-4.546875 z"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:96px;font-family:'Bauhaus 93';-inkscape-font-specification:'Bauhaus 93, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#3e8698;fill-opacity:1"
-         id="path824" />
+         id="path824"
+         inkscape:connector-curvature="0" />
     </g>
     <g
        aria-label="X"
@@ -71,8 +72,8 @@
        id="flowRoot831">
       <path
          d="m 195.83594,38.026579 -6.9336,12.96875 7.16797,13.691406 h -8.33984 l -3.28125,-6.464844 -2.77344,6.464844 h -8.20312 l 7.32421,-13.476563 -6.93359,-13.183593 h 8.26172 l 3.10547,6.054687 2.5,-6.054687 z"
-         style=""
-         id="path821" />
+         id="path821"
+         inkscape:connector-curvature="0" />
     </g>
     <ellipse
        style="fill:#ca0d9b;fill-opacity:1;stroke:none;stroke-width:0.26458332;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
@@ -81,5 +82,18 @@
        cy="231.15244"
        rx="8.3762035"
        ry="8.0411558" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="disabled">
+    <rect
+       style="opacity:1;fill:#d40000;fill-opacity:1;stroke:none;stroke-width:0.39358896;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect818"
+       width="4.6216187"
+       height="114.84724"
+       x="-2.7230186"
+       y="-1.5056994"
+       transform="matrix(0.71679145,-0.69728761,0.71679145,0.69728761,0,0)" />
   </g>
 </svg>
