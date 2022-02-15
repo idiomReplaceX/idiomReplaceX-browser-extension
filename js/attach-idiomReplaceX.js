@@ -1,5 +1,4 @@
-let  clientScriptsBaseUrl = 'https://idiomreplacex.de/client/';
-let  filterServiceBaseUrl = 'https://idiomreplacex.de/service/src/';
+let  clientScriptsBaseUrl = 'https://idiomreplacex.de/client/'
 
 function attachActivateScript() {
     return function () {
