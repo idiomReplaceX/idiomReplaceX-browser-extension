@@ -82,14 +82,27 @@
     document.body.appendChild(bar);
     fetchMethodOptions(baseURL, select);
     select.addEventListener('change', function(event){
-      setCookie(cookieName, event.target.value, 10);
-      window.location.reload();
+      if(getCookie(cookieName) !== event.target.value){
+        setCookie(cookieName, event.target.value, 10);
+        // first revert the page to original state
+        bindTo.idiomReplaceX.revertAllReplaceXments();
+        if(event.target.value !== "disabled"){
+          // apply the selected method to all relevantTextBlocks
+          // bindTo.idiomReplaceX.requestForReplaceX();
+        }
+      }
     })
   }
 
   let fetchMethodOptions = function(baseURL, selectElement){
     jsonQuery("GET",  "methods", null, function(jsonData){
       selectElement.innerHTML = "";
+
+      let option = document.createElement("option");
+      option.setAttribute('name', "disabled");
+      option.innerText = "-- disabled --"
+      selectElement.appendChild(option);
+
       jsonData.forEach(function(methodName){
         let option = document.createElement("option");
         option.setAttribute('name', methodName);
