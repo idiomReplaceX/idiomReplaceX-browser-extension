@@ -1,5 +1,5 @@
 browser.browserAction.onClicked.addListener((tab) => {
-  // disable the active tab
+  // disable the addond icon button in the active tab
   browser.browserAction.disable(tab.id);
   // requires the "tabs" or "activeTab" permission, or host permissions for the URL
   console.log(tab.url);
