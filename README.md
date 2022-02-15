@@ -24,7 +24,7 @@ Also via the page `about:debugging`
 ### run
 
 ~~~
-./node_modules/web-ext/bin/web-ext run 
+./node_modules/web-ext/bin/web-ext run --url <the start url to open>
 ~~~
 
 ### code check
