@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "IdiomReplaceX",
   "version": "1.0",
-  "description": "Adds a button to the browser toolbar, which allows starting IdiomReplaceX on almost any web page.",
+  "description": "Adds a button to the browser toolbar, which allows apply IdiomReplaceX on almost any web page. IdiomReplaceX offers filters, which will literarily modify the webpage content when activated. For further information on the net art project IdiomReplaceX please see https://idiomreplacex.de/",
   "permissions": [
     "*://idiomreplacex.de/*",
     "activeTab"
@@ -12,7 +12,7 @@
     "default_title": "IdiomReplaceX"
   },
   "icons": {
-    "48": "icons/irx-logo-48.png"
+    "48": "icon/irx-logo-48.png",
   },
   "background": {
     "scripts": [
