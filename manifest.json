@@ -1,23 +1,24 @@
 {
-  "manifest_version": 2,
-  "name": "IdiomReplaceX",
-  "version": "1.0",
-  "description": "Adds a button to the browser toolbar, which allows apply IdiomReplaceX on almost any web page. IdiomReplaceX offers filters, which will literarily modify the webpage content when activated. For further information on the net art project IdiomReplaceX please see https://idiomreplacex.de/",
-  "permissions": [
-    "*://idiomreplacex.de/*",
-    "activeTab"
-  ],
-  "browser_action": {
-    "default_icon": "icons/irx-logo-48.png",
-    "default_title": "IdiomReplaceX"
-  },
-  "icons": {
-    "48": "icon/irx-logo-48.png",
-  },
-  "background": {
+    "manifest_version": 2,
+    "name": "IdiomReplaceX",
+    "version": "1.1",
+    "description": "Adds a button to the browser toolbar, which allows apply IdiomReplaceX on almost any web page. IdiomReplaceX offers filters, which will literarily modify the webpage content when activated. For further information on the net art project IdiomReplaceX please see https://idiomreplacex.de/",
+    "permissions": [
+        "*://idiomreplacex.de/*",
+        "activeTab"
+    ],
+    "browser_action": {
+        "default_icon": "icons/irx-logo-48.png",
+        "default_title": "IdiomReplaceX"
+    },
+    "icons": {
+        "48": "icons/irx-logo-48.png",
+        "96": "icons/irx-logo-96.png"
+    },
+    "background": {
     "scripts": [
-      "js/background-script.js"
+            "js/background-script.js"
     ]
-  }
+}
 }
 
