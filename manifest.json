@@ -1,10 +1,10 @@
 {
     "manifest_version": 2,
     "name": "IdiomReplaceX",
-    "version": "1.1",
+    "version": "1.2",
     "description": "Adds a button to the browser toolbar, which allows apply IdiomReplaceX on almost any web page. IdiomReplaceX offers filters, which will literarily modify the webpage content when activated. For further information on the net art project IdiomReplaceX please see https://idiomreplacex.de/",
     "permissions": [
-        "*://idiomreplacex.de/*",
+        "<all_urls>",
         "activeTab"
     ],
     "browser_action": {
