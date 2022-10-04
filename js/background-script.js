@@ -52,18 +52,25 @@ function restart(tabId) {
             let executing = browser.tabs.executeScript(
                     tab.id,
                     {
-                        file: 'js/attach-idiomReplaceX.js',
+                        file: 'js/client/idiomReplaceX.js',
                         allFrames: false
                     }
             );
             executing.then(
                     function () {
                         // onExecuted
-                        //console.log("attach-idiomReplaceX.js loaded");
+                        console.log("idiomReplaceX.js loaded");
+                        browser.tabs.executeScript(
+                            tab.id,
+                            {
+                                file: 'js/client/activate.js',
+                                allFrames: false
+                            }
+                        );
                     },
                     function (error) {
                         // onError
-                        console.log("attach-idiomReplaceX.js ERROR:" + error);
+                        console.log("idiomReplaceX.js ERROR:" + error);
                     }
             );
         });

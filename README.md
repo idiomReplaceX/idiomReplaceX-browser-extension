@@ -36,7 +36,7 @@ Also via the page `about:debugging`
 ### pack the extension
 
 ~~~
-./node_modules/web-ext/bin/web-ext build     
+./node_modules/web-ext/bin/web-ext build --overwrite-dest 
 ~~~
 
 ### Self-Signing the extension
